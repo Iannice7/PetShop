@@ -1,0 +1,21 @@
+create table cliente(
+	id_cliente int not null primary key auto_increment,
+	nome varchar(50),
+	cognome varchar(50),
+	citta varchar(50),
+	telefono varchar(10),
+	indirizzo varchar(50)
+);
+
+create table animale(
+	matricola int not null primary key,
+	tipo_animale varchar(50),
+	nome_animale varchar(50),
+	data_acquisto varchar(50),
+	prezzo int,
+	id_cliente int,
+	foreign key animale(id_cliente) references cliente(id_cliente)
+);
+
+drop table animale ;
+drop table cliente;
