@@ -6,5 +6,10 @@
 	<classpathentry kind="lib" path="C:/eclipselink/jlib/eclipselink.jar"/>
 	<classpathentry kind="lib" path="C:/eclipselink/jlib/jpa/javax.persistence_2.1.0.v201304241213.jar"/>
 	<classpathentry kind="lib" path="C:/jars/commons-csv-1.10.0.jar"/>
+	<classpathentry kind="lib" path="C:/jars/poi-5.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/jars/poi-ooxml-5.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/jars/commons-io-2.13.0.jar"/>
+	<classpathentry kind="lib" path="C:/jars/xmlbeans-5.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/jars/commons-lang3-3.12.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
