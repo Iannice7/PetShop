@@ -4,11 +4,8 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
-
-
 
 public  class CSVReader {
 	
@@ -23,12 +20,10 @@ public  class CSVReader {
             	if(record!=null) {
                     records.add(record);  //e successivamente lo aggiunge alla Lista record che contiene gli oggetti di tipo CSVRecord
             	}
-
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return records;		//Ritorna la lista dei record letti dal file
     }
     
