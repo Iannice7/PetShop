@@ -1,0 +1,24 @@
+Nome: Marco Cognome: Rossi  Telefono: 33498756
+Data di acquisto: 01/03/2023 matricola: 345432 Nome animale: Luna 
+
+Nome: Marco Cognome: Rossi  Telefono: 33498756
+Data di acquisto: 03/01/2022 matricola: 455555 Nome animale: Billy 
+
+Nome: Marco Cognome: Rossi  Telefono: 33498756
+Data di acquisto: 04/01/2022 matricola: 456666 Nome animale: Pluto 
+
+Nome: Francesco Cognome: Bianchi Telefono: 33500099
+Data di acquisto: 05/01/2022 matricola: 233344 Nome animale: vuoto 
+
+Nome: Francesco Cognome: Bianchi Telefono: 33500099
+Data di acquisto: 06/01/2022 matricola: 233345 Nome animale: vuoto 
+
+Nome: Pietro Cognome: Verdi Telefono: 33356777
+Data di acquisto: 07/01/2022 matricola: 356777 Nome animale: vuoto 
+
+Nome: Giorgio Cognome: Rossi  Telefono: 33467788
+Data di acquisto: 08/01/2022 matricola: 546777 Nome animale: Stella 
+
+Nome: Giorgio Cognome: Rossi  Telefono: 33467788
+Data di acquisto: 19/01/2022 matricola: 345439 Nome animale: Luna 
+

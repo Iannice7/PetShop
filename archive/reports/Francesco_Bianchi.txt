@@ -1,0 +1,12 @@
+Nome: Francesco Cognome: Bianchi Telefono: 33500099
+Data di acquisto: 05/01/2022 matricola: 233344 Nome animale:  prezzo: 45
+
+Nome: Francesco Cognome: Bianchi Telefono: 33500099
+Data di acquisto: 06/01/2022 matricola: 233345 Nome animale:  prezzo: 10
+
+Nome: Francesco Cognome: Bianchi Telefono: 33500099
+Data di acquisto: 05/01/2022 matricola: 233344 Nome animale:  prezzo: 45
+
+Nome: Francesco Cognome: Bianchi Telefono: 33500099
+Data di acquisto: 06/01/2022 matricola: 233345 Nome animale:  prezzo: 10
+

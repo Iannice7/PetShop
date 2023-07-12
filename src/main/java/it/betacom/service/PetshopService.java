@@ -22,7 +22,7 @@ import it.betacom.model.Cliente;
 
 public class PetshopService {
 	
-	String filePath = "C:\\Workspace\\Petshop\\archive\\PetShop_datiE.csv";
+	String filePath = ".\\archive\\PetShop_datiE.csv";
 
 	public PetshopService() {}
 
@@ -65,19 +65,18 @@ public class PetshopService {
 
 				entityManager.persist(cliente);
 				existingClienti.put(clienteKey, cliente); // Assegno alla mappa il valore del cliente corrente e la sua
-															// chiave cosi che
-															// possa essere riconosciuta nel secondo giro di for
+															// chiave cosi che															// possa essere riconosciuta nel secondo giro di for
 			}
 
 			String tipoAnimale = record.get(5);
 			String nomeAnimale = record.get(6);
 			int matricola = 0;
-			String matricolaString = record.get(7);
+			String matricolaString = record.get(7); 
 
 			if (matricolaString != null && !matricolaString.isEmpty() && matricolaString.matches("\\d+")) {
 				matricola = Integer.parseInt(matricolaString); 
 																
-			} // INSERIRE GESTIONE DELLA MATRICOLA PK
+			} // INSERIRE GESTIONE DELLA MATRICOLA PK 
 
 			String dataAcquisto = record.get(8);
 			int prezzo = 0;
