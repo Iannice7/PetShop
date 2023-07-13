@@ -7,3 +7,9 @@ Data di acquisto: 07/01/2022 matricola: 356777 Nome animale: vuoto prezzo: 15
 Nome: Pietro Cognome: Verdi Telefono: 33356777
 Data di acquisto: 07/01/2022 matricola: 356777 Nome animale: vuoto prezzo: 15
 
+Nome: Pietro Cognome: Verdi Telefono: 33356777
+Data di acquisto: 07/01/2022 matricola: 356777 Nome animale: vuoto prezzo: 15
+
+Nome: Pietro Cognome: Verdi Telefono: 33356777
+Data di acquisto: 07/01/2022 matricola: 356777 Nome animale: vuoto prezzo: 15
+

@@ -21,36 +21,36 @@ public class PetshopService {
 	String filePath = ".\\archive\\PetShop_datiE.csv";
 	EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Petshop");
 	EntityManager entityManager = emFactory.createEntityManager();
+	private int count = 50;
 
 	public PetshopService() {}
 
-	public void processCSVAndSaveData(Cliente cliente, Animale animale) {
-		// EntityManager
+	public void processCSVAndSaveData() {
 		entityManager.getTransaction().begin();
 
 		// Reading the CSV file
-		List<CSVRecord> records = CSVReader.readCSV(filePath); // Acquisisco la lista di ritorno dalla funzione readCSV
+		List<CSVRecord> records = CSVReader.readCSV(filePath); 
 
-		Map<String, Cliente> existingClienti = new HashMap<>(); // Mappo come chiave una String all'oggetto Cliente che
-																// è una HashMap ovvero una lista di valori unici
+		Map<String, Cliente> existingClienti = new HashMap<>(); 
+																
 
-		for (int i = 2; i < records.size(); i++) { // Faccio partire il for dal numero 2 per saltare le prime due righe
+		for (int i = 2; i < records.size(); i++) { 
 
-			CSVRecord record = records.get(i); // Assegno all'oggetto CSVRecord il valore di ogni riga di i
+			CSVRecord record = records.get(i); 
 			String nomeCliente = record.get(0);
 			String cognomeCliente = record.get(1);
-			String clienteKey = nomeCliente + " " + cognomeCliente; // Assegno come valore alla chiave della mappa la
-																	// concatenazione di Nome e Cognome
-			
-			if (existingClienti.containsKey(clienteKey)) { // Controllo che il cliente non sia gia presente, se presente
-				cliente = existingClienti.get(clienteKey); // assegna al valore di cliente ricorrente di lettura quello
-															// gia esistente
-			} else { // Altrimenti compila i campi mancanti qui sotto
+			String clienteKey = nomeCliente + " " + cognomeCliente; 
+																	
+			Cliente cliente = new Cliente(); 
+			if (existingClienti.containsKey(clienteKey)) { 
+				cliente = existingClienti.get(clienteKey); 
+															
+			} else { 
 				String cittaCliente = record.get(2);
 				String telefonoCliente = record.get(3);
 				String indirizzoCliente = record.get(4);
 
-				cliente = new Cliente(); // Costruisco Cliente con i getter e setter
+				
 				cliente.setNome(nomeCliente);
 				cliente.setCognome(cognomeCliente);
 				cliente.setCitta(cittaCliente);
@@ -58,8 +58,8 @@ public class PetshopService {
 				cliente.setIndirizzo(indirizzoCliente);
 
 				entityManager.persist(cliente);
-				existingClienti.put(clienteKey, cliente); // Assegno alla mappa il valore del cliente corrente e la sua
-														// chiave cosi che possa essere riconosciuta nel secondo															// giro di for
+				existingClienti.put(clienteKey, cliente); 
+																									
 			}
 
 			String tipoAnimale = record.get(5);
@@ -80,7 +80,7 @@ public class PetshopService {
 			} else
 				prezzo = 0;
 
-			animale = new Animale(); // Costruisco Animale con i getter e setter
+			Animale animale = new Animale(); // Costruisco Animale con i getter e setter
 			animale.setTipoAnimale(tipoAnimale);
 			animale.setNomeAnimale(nomeAnimale);
 			animale.setMatricola(matricola);
@@ -136,7 +136,7 @@ public class PetshopService {
 				writer.printf("matricola: " + matricola + " ");
 				writer.printf("Nome animale: " + nomeAnimale + " ");
 				writer.printf("prezzo: " + prezzo + "\n");
-				writer.println(); // Aggiunge una riga vuota
+				writer.println(); 
 
 				System.out.println(
 						"I dati sono stati aggiunti al file di testo per " + nome + " " + cognome + " |Report1" );
