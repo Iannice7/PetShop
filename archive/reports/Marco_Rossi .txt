@@ -16,3 +16,12 @@ Data di acquisto: 03/01/2022 matricola: 455555 Nome animale: Billy prezzo: 20
 Nome: Marco Cognome: Rossi  Telefono: 33498756
 Data di acquisto: 04/01/2022 matricola: 456666 Nome animale: Pluto prezzo: 100
 
+Nome: Marco Cognome: Rossi  Telefono: 33498756
+Data di acquisto: 01/03/2023 matricola: 345432 Nome animale: Luna prezzo: 50
+
+Nome: Marco Cognome: Rossi  Telefono: 33498756
+Data di acquisto: 03/01/2022 matricola: 455555 Nome animale: Billy prezzo: 20
+
+Nome: Marco Cognome: Rossi  Telefono: 33498756
+Data di acquisto: 04/01/2022 matricola: 456666 Nome animale: Pluto prezzo: 100
+

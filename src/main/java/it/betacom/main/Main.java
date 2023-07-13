@@ -12,6 +12,9 @@ public class Main {
 		Cliente cliente  = new Cliente();
 		Animale animale = new Animale();
 		sv.processCSVAndSaveData(cliente,animale);
+		sv.stampaReport1();
+		sv.stampaReport2();
+		sv.close();
 
 	}
 

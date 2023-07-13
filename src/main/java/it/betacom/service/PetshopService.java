@@ -1,5 +1,4 @@
 package it.betacom.service;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,28 +8,24 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-
 import org.apache.commons.csv.CSVRecord;
-
 import it.betacom.model.Animale;
 import it.betacom.model.Cliente;
 
 public class PetshopService {
-	
+
 	String filePath = ".\\archive\\PetShop_datiE.csv";
+	EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Petshop");
+	EntityManager entityManager = emFactory.createEntityManager();
 
 	public PetshopService() {}
 
 	public void processCSVAndSaveData(Cliente cliente, Animale animale) {
-
 		// EntityManager
-		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("Petshop");
-		EntityManager entityManager = emFactory.createEntityManager();
 		entityManager.getTransaction().begin();
 
 		// Reading the CSV file
@@ -42,14 +37,13 @@ public class PetshopService {
 		for (int i = 2; i < records.size(); i++) { // Faccio partire il for dal numero 2 per saltare le prime due righe
 
 			CSVRecord record = records.get(i); // Assegno all'oggetto CSVRecord il valore di ogni riga di i
-
 			String nomeCliente = record.get(0);
 			String cognomeCliente = record.get(1);
 			String clienteKey = nomeCliente + " " + cognomeCliente; // Assegno come valore alla chiave della mappa la
 																	// concatenazione di Nome e Cognome
-
+			
 			if (existingClienti.containsKey(clienteKey)) { // Controllo che il cliente non sia gia presente, se presente
-				cliente = existingClienti.get(clienteKey); // assegna al valore di cliente ricorrente di lettura  quello
+				cliente = existingClienti.get(clienteKey); // assegna al valore di cliente ricorrente di lettura quello
 															// gia esistente
 			} else { // Altrimenti compila i campi mancanti qui sotto
 				String cittaCliente = record.get(2);
@@ -65,18 +59,18 @@ public class PetshopService {
 
 				entityManager.persist(cliente);
 				existingClienti.put(clienteKey, cliente); // Assegno alla mappa il valore del cliente corrente e la sua
-															// chiave cosi che															// possa essere riconosciuta nel secondo giro di for
+														// chiave cosi che possa essere riconosciuta nel secondo															// giro di for
 			}
 
 			String tipoAnimale = record.get(5);
 			String nomeAnimale = record.get(6);
 			int matricola = 0;
-			String matricolaString = record.get(7); 
+			String matricolaString = record.get(7);
 
 			if (matricolaString != null && !matricolaString.isEmpty() && matricolaString.matches("\\d+")) {
-				matricola = Integer.parseInt(matricolaString); 
-																
-			} // INSERIRE GESTIONE DELLA MATRICOLA PK 
+				matricola = Integer.parseInt(matricolaString);
+
+			} // INSERIRE GESTIONE DELLA MATRICOLA PK
 
 			String dataAcquisto = record.get(8);
 			int prezzo = 0;
@@ -96,15 +90,21 @@ public class PetshopService {
 			entityManager.persist(animale);
 
 		}
+		// Committo tutto sul database e chiuso le factory
+		entityManager.getTransaction().commit();
 
+	}
+
+	public void stampaReport1() {
 		// REPORT 1
 		/*
 		 * Cliente: Marco Rossi .... Data - matricola animale1 - nome - prezzo di
 		 * vendita
 		 */
-		Query queryReport1 = entityManager.createQuery("SELECT c.nome, c.cognome, c.telefono, a.dataAcquisto, a.matricola, a.nomeAnimale, a.prezzo FROM Cliente c JOIN c.animales a");
+		Query queryReport = entityManager.createQuery(
+				"SELECT c.nome, c.cognome, c.telefono, a.dataAcquisto, a.matricola, a.nomeAnimale, a.prezzo FROM Cliente c JOIN c.animales a");
 		@SuppressWarnings("unchecked")
-		List<Object[]> resultsReport1 = queryReport1.getResultList();
+		List<Object[]> resultsReport = queryReport.getResultList();
 		String path = ".\\archive\\reports";
 		Path directoryPath = Paths.get(path);
 
@@ -116,7 +116,7 @@ public class PetshopService {
 			}
 		}
 
-		for (Object[] row : resultsReport1) {
+		for (Object[] row : resultsReport) {
 			String nome = (String) row[0];
 			String cognome = (String) row[1];
 			String telefono = (String) row[2];
@@ -124,8 +124,11 @@ public class PetshopService {
 			int matricola = (int) row[4];
 			String nomeAnimale = (String) row[5];
 			int prezzo = (int) row[6];
-			String report1FilePath = path + "\\" + nome + "_" + cognome + ".txt";
-			try (PrintWriter writer = new PrintWriter(new FileWriter(report1FilePath, true))) {
+			String reportFilePath = path + "\\" + nome + "_" + cognome + ".txt";
+			if (nomeAnimale.isEmpty()) {
+				nomeAnimale = "vuoto";
+			}
+			try (PrintWriter writer = new PrintWriter(new FileWriter(reportFilePath, true))) {
 				writer.printf("Nome: " + nome + " ");
 				writer.printf("Cognome: " + cognome + " ");
 				writer.printf("Telefono: " + telefono + "\n");
@@ -136,7 +139,7 @@ public class PetshopService {
 				writer.println(); // Aggiunge una riga vuota
 
 				System.out.println(
-						"I dati sono stati aggiunti al file di testo per " + nome + " " + cognome + " |Report1");
+						"I dati sono stati aggiunti al file di testo per " + nome + " " + cognome + " |Report1" );
 			} catch (IOException e) {
 				System.out.println(
 						"Si è verificato un errore durante l'aggiunta al file di testo per " + nome + " " + cognome);
@@ -144,19 +147,22 @@ public class PetshopService {
 			}
 
 		}
-
+	}
+	
+	public void stampaReport2() {
 		// REPORT 2
 		/*
 		 * Report2: lista degli animali venduti ordinati per data di acquisto e per ogni
 		 * acquisto i dati del cliente Data di acquisto - Animale1 -nome -matricola -
 		 * nome del cliente- cellulare
 		 */
-
-		Query queryReport2 = entityManager
-				.createQuery("SELECT a.dataAcquisto, a.nomeAnimale, a.matricola, c.nome, c.cognome, c.telefono\r\n"
+		String path = ".\\archive\\reports";
+		Path directoryPath = Paths.get(path);
+		Query queryReport = entityManager.createQuery("SELECT a.dataAcquisto, a.nomeAnimale, a.matricola, c.nome, c.cognome, c.telefono\r\n"
 						+ "FROM Cliente c\r\n" + "JOIN c.animales a\r\n" + "ORDER BY a.dataAcquisto ASC");
+		
 		@SuppressWarnings("unchecked")
-		List<Object[]> resultsReport2 = queryReport2.getResultList();
+		List<Object[]> resultsReport = queryReport.getResultList();
 		if (!Files.exists(directoryPath)) {
 			try {
 				Files.createDirectories(directoryPath);
@@ -165,9 +171,9 @@ public class PetshopService {
 			}
 		}
 
-		String report2FilePath = path + "\\ListaVenditeTotali.txt";
-		try (PrintWriter writer = new PrintWriter(new FileWriter(report2FilePath))) {
-			for (Object[] row : resultsReport2) {
+		String reportFilePath = path + "\\ListaVenditeTotali.txt";
+		try (PrintWriter writer = new PrintWriter(new FileWriter(reportFilePath))) {
+			for (Object[] row : resultsReport) {
 				String nome = (String) row[3];
 				String cognome = (String) row[4];
 				String telefono = (String) row[5];
@@ -185,17 +191,17 @@ public class PetshopService {
 				writer.printf("Data di acquisto: " + data_acquisto + " ");
 				writer.printf("matricola: " + matricola + " ");
 				writer.printf("Nome animale: " + nomeAnimale + " \n");
-				writer.println(); 
+				writer.println();
 
 			}
-			System.out.println("Il file di report 2 è stato creato: " + report2FilePath);
+			System.out.println("Il file di report 2 è stato creato: " + reportFilePath);
 		} catch (IOException e) {
 			System.out.println("Si è verificato un errore durante la creazione del file di report 2.");
 			e.printStackTrace();
 		}
-
-		// Committo tutto sul database e chiuso le factory
-		entityManager.getTransaction().commit();
+	}
+	
+	public void close() {
 		entityManager.close();
 		emFactory.close();
 	}
