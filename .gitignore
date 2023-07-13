@@ -1,2 +1,3 @@
 .classpath
-./archive
+./archive/
+*.txt
