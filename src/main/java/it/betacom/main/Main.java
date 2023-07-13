@@ -1,6 +1,4 @@
 package it.betacom.main;
-import it.betacom.model.Animale;
-import it.betacom.model.Cliente;
 import it.betacom.service.PetshopService;
 
 public class Main {
@@ -12,6 +10,8 @@ public class Main {
 		sv.stampaReport1();
 		sv.stampaReport2();
 		sv.close();
+		
+		
 	}
 
 }

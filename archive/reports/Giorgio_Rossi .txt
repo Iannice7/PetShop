@@ -4,3 +4,9 @@ Data di acquisto: 19/01/2022 matricola: 345439 Nome animale: Luna prezzo: 50
 Nome: Giorgio Cognome: Rossi  Telefono: 33467788
 Data di acquisto: 08/01/2022 matricola: 546777 Nome animale: Stella prezzo: 65
 
+Nome: Giorgio Cognome: Rossi  Telefono: 33467788
+Data di acquisto: 19/01/2022 matricola: 345439 Nome animale: Luna prezzo: 50
+
+Nome: Giorgio Cognome: Rossi  Telefono: 33467788
+Data di acquisto: 08/01/2022 matricola: 546777 Nome animale: Stella prezzo: 65
+
